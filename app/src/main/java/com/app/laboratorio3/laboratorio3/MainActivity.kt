@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         val addContactButton = findViewById<Button>(R.id.btnAddContact)
         addContactButton.setOnClickListener {
             startActivity(Intent(this, CreateContactActivity::class.java))
+            this.finish()
         }
 
     }
