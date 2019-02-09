@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.app.laboratorio3.laboratorio3.Providers.ContactsProvider
 import com.app.laboratorio3.laboratorio3.models.Contact
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_contact.*
 
 class ViewContactActivity : AppCompatActivity() {
@@ -20,7 +21,14 @@ class ViewContactActivity : AppCompatActivity() {
             detailsContactName.text = actualContact!!.name
             detailsContactPhone.text = actualContact!!.phone
             detailsContactEmail.text = actualContact!!.email
+
+            if (actualContact.imagePath != ""){
+                Glide.with(this).load(actualContact.imagePath).into(detailsContactImageView)
+            }
+
         }
+
+
 
         btnBackToMain.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
@@ -53,5 +61,12 @@ class ViewContactActivity : AppCompatActivity() {
         cursor.close()
 
         return actualContact
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
+
     }
 }

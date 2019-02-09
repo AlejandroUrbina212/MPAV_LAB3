@@ -46,7 +46,8 @@
                         android:id="@+id/detailsContactImageView"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:contentDescription="ContactPhoto"/>
+                        android:contentDescription="ContactPhoto"
+                        android:src="@drawable/ic_account_circle_black_24dp"/>
 
                 <Button
                         android:id="@+id/changePhotoButton"
@@ -81,7 +82,6 @@
                     android:textColor="@color/colorWhite"
                     android:text="Teléfono del Contacto"
                     android:layout_margin="10dp"/>
-
 
 
             <LinearLayout

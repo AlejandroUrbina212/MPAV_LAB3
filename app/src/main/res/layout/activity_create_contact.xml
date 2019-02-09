@@ -47,14 +47,15 @@
                         android:id="@+id/newContactImageView"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:contentDescription="ContactPhoto"/>
+                        android:contentDescription="ContactPhoto"
+                        android:src="@drawable/ic_account_circle_black_24dp"/>
 
                 <Button
                         android:id="@+id/changePhotoButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
-                        android:background="@color/colorTransparent" />
+                        android:background="@color/colorTransparent"/>
             </android.support.v7.widget.CardView>
 
             <EditText
@@ -75,10 +76,10 @@
                     android:inputType="phone"/>
             <EditText
                     android:layout_marginTop="20dp"
-                    android:id="@+id/mailEditText"
+                    android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mail del Nuevo Contacto"
+                    android:hint="E-mail del Nuevo Contacto"
                     android:textColor="@color/colorWhite"/>
             <LinearLayout
                     android:layout_width="match_parent"
@@ -109,7 +110,8 @@
                         android:textColor="@android:color/white"
                         android:layout_marginBottom="10dp"
                         android:padding="10dp"
-                        android:layout_marginLeft="15dp"/>
+                        android:layout_marginLeft="15dp"
+                        android:onClick="createContact"/>
 
 
             </LinearLayout>
