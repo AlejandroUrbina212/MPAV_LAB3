@@ -11,24 +11,26 @@ import kotlinx.android.synthetic.main.activity_view_contact.*
 
 class ViewContactActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_contact)
-
-        val savedContactId = intent.getIntExtra(MainActivity.SAVED_CONTACT_ID, -1)
+        
+        //savedContactId saves the Extra passed by MainActivity
+        val savedContactId = intent.getIntExtra("savedContactId", -1)
+        //if there's actually a saved contact, then create an actualContact object
         if (savedContactId != -1) {
+            //fill the editTexts of the xml file
             val actualContact = findContactById(savedContactId)
             detailsContactName.text = actualContact!!.name
             detailsContactPhone.text = actualContact!!.phone
             detailsContactEmail.text = actualContact!!.email
 
-            if (actualContact.imagePath != ""){
-                Glide.with(this).load(actualContact.imagePath).into(detailsContactImageView)
+            //fill the detailsContactImageView if the actual contact has a photoPath (its not empty)
+            if (actualContact.photoPath != ""){
+                Glide.with(this).load(actualContact.photoPath).into(detailsContactImageView)
             }
-
         }
-
-
 
         btnBackToMain.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
@@ -36,10 +38,16 @@ class ViewContactActivity : AppCompatActivity() {
         }
 
         btnEditContact.setOnClickListener{
-            startActivity(Intent(this, EditContactActivity::class.java))
+            //Starts EditContactActivity with the savedContactId as an extra
+            val intent = Intent(this, EditContactActivity::class.java)
+            intent.putExtra("editableContactId", savedContactId)
+            startActivity(intent)
             this.finish()
         }
     }
+    /**
+     * returns a single contact in the database
+     */
 
     private fun findContactById(id: Int): Contact? {
         var actualContact: Contact? = null
@@ -48,6 +56,7 @@ class ViewContactActivity : AppCompatActivity() {
         val contact = Uri.parse(URL)
         val cursor = contentResolver.query(contact, null, null, null, "name")
 
+        //instances a single ContactType Object to work with along all the lifeCycle of the current Activity
         if (cursor.moveToFirst()) {
             actualContact = Contact(
                 cursor.getColumnIndex(ContactsProvider._ID),

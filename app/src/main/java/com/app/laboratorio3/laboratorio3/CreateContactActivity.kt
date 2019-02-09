@@ -29,8 +29,6 @@ class CreateContactActivity : AppCompatActivity() {
         private const val IMAGE_DIRECTORY = "/contactsImages"
 
     }
-
-    private val EXTERNAL_WRITE_CODE = 1
     private var photoPath: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,21 +41,24 @@ class CreateContactActivity : AppCompatActivity() {
         }
 
         btnCreateContact.setOnClickListener {
+            //obtain the text in all three editTexts
             val contactName = nameEditText.text.toString()
             val contactPhone = phoneEditText.text.toString()
             val contactEmail = emailEditText.text.toString()
-
+            //if none of the editTexts is empty
             if (contactName.isNotEmpty() && contactPhone.isNotEmpty() && contactEmail.isNotEmpty()) {
 
+                //fill the contentValue with the specified data
                 val contentV = ContentValues()
                 contentV.put(ContactsProvider.NAME, contactName)
                 contentV.put(ContactsProvider.PHONE, contactPhone)
                 contentV.put(ContactsProvider.EMAIL, contactEmail)
                 contentV.put(ContactsProvider.IMAGE_PATH, photoPath)
 
-
+                //insert contentV in the database (is a new register)
                 val uri = contentResolver.insert(ContactsProvider.CONTENT_URI, contentV)
 
+                //clear every editText and set default image
                 nameEditText.text.clear()
                 phoneEditText.text.clear()
                 emailEditText.text.clear()
@@ -82,6 +83,7 @@ class CreateContactActivity : AppCompatActivity() {
         }
     }
 
+    //creates an intent to retrieve external storage data
     private fun pickPhotoFromDevice() {
         val galleryIntent = Intent(
             Intent.ACTION_PICK,
@@ -92,12 +94,17 @@ class CreateContactActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //if something is selected in the gallery picker
         if (data != null) {
+            //save data as an Uri
             val contentURI = data.data
             try {
+                //pass the contentUri as a bitmap
                 val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                //photopath will take the value of constructImagePath (a String of the photo's path)
                 photoPath = constructImagePath(bitmap)
                 Toast.makeText(this, "Imagen cargada exitosamente!", Toast.LENGTH_SHORT).show()
+                //sets the image in the image view as a bitmap
                 newContactImageView!!.setImageBitmap(bitmap)
 
             } catch (ioException: IOException) {
@@ -107,18 +114,23 @@ class CreateContactActivity : AppCompatActivity() {
             Toast.makeText(this, "No hay nada seleccionado!", Toast.LENGTH_SHORT).show()
         }
     }
+    //Returns a string with the absolute path of the selected photo
 
     private fun constructImagePath(imageAsBitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()
+        //compress the image, to JPEG and to a 90% quality
         imageAsBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        //creates a File with the actual path name
         val imageDirectory = File((Environment.getExternalStorageDirectory()).toString() + IMAGE_DIRECTORY)
         if (!imageDirectory.exists()) {
             imageDirectory.mkdirs()
         }
         try {
+            //adds the unique id for the photo and the extension .jpg
             val myFile = File(
                 imageDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".jpg")
             )
+            //creates file in the actual pathName
             myFile.createNewFile()
             val fileOutputAsStream = FileOutputStream(myFile)
             fileOutputAsStream.write(bytes.toByteArray())
@@ -126,6 +138,7 @@ class CreateContactActivity : AppCompatActivity() {
                 this, arrayOf(myFile.path), arrayOf("image/jpeg"), null
             )
             fileOutputAsStream.close()
+            //returns the absolute path of the Image
             return myFile.absolutePath
         } catch (ioException: IOException) {
             Toast.makeText(this, ioException.toString(), Toast.LENGTH_SHORT).show()
@@ -133,13 +146,6 @@ class CreateContactActivity : AppCompatActivity() {
         return ""
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == EXTERNAL_WRITE_CODE) {
-            if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Acceso a escritura denegado", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java)
