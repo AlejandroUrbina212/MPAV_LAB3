@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.app.laboratorio3.laboratorio3">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
             android:name=".models.myApplicationExtendedClass"
             android:allowBackup="true"
@@ -23,6 +26,11 @@
         </activity>
         <activity android:name=".SendMailActivity">
         </activity>
+        <activity android:name=".EditContactActivity">
+        </activity>
+
+        <provider android:name=".Providers.ContactsProvider"
+                  android:authorities="com.app.laboratorio3.ContactsProvider"/>
     </application>
 
 </manifest>

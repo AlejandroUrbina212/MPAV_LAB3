@@ -1,10 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ViewContactActivity">
+    <RelativeLayout
+            android:id="@+id/createContactRelLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="Product Sans"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+            <TextView
+                    android:id="@+id/txtDetailsContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Detalles del Contacto"
+                    android:textSize="35sp"
+                    android:textColor="@android:color/white"/>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/detailsContactCardView"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="40dp"
+                    tools:style="@style/CardView">
+
+                <ImageView
+                        android:id="@+id/detailsContactImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:contentDescription="ContactPhoto"/>
+
+                <Button
+                        android:id="@+id/changePhotoButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorTransparent"/>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                    android:id="@+id/detailsContactName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="Nombre del Contacto"
+                    android:layout_margin="10dp"/>
+
+            <TextView
+                    android:id="@+id/detailsContactPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="Teléfono del Contacto"
+                    android:layout_margin="10dp"/>
+            <TextView
+                    android:id="@+id/detailsContactEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="Teléfono del Contacto"
+                    android:layout_margin="10dp"/>
+
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal">
+                <Button
+                        android:id="@+id/btnEditContact"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorAccent"
+                        android:text="Editar"
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="10dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="10dp"
+                />
+                <Button
+                        android:id="@+id/btnBackToMain"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorAccent"
+                        android:text="Regresar"
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="10dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="15dp"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

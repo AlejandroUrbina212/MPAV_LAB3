@@ -1,10 +1,15 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/contactItem"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:padding="10dip"
-          android:textSize="16dip"
-          android:textStyle="bold"
-          android:textColor="@color/colorWhite"
-          android:background="@color/colorAccent">
-</TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="8dp"
+              android:gravity="center_horizontal"
+>
+    <TextView
+            android:id="@+id/tv_contact_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"/>
+
+</LinearLayout>
